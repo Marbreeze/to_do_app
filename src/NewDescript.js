@@ -10,6 +10,7 @@ const NewDescript = (props) =>{
                     <li>{props.description}</li>
                 </ul>
                 </div>
+                < br />
         </div>
     );
 }

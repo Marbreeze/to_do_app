@@ -5,17 +5,35 @@ import './App.css'
 
 
 class App extends React.Component{
-    state= {
-        posts : [
-            {data: 'Say', name: 'Marinella', description: 'dura'},
-            {data: 'Say', name: 'Marinella', description: 'dura'}    
+    state = {
+        posts: [
+            {data: 'Say1', name: 'Marinella', description: 'kura'},
+            {data: 'Say2', name: 'Hakeem', description: 'krutoi'},
+            {data: 'Say1', name: 'Marinella', description: 'kura'},
+            {data: 'Say2', name: 'Hakeem', description: 'krutoi'} 
         ]
-    };
+    }
     
-    handleClick(index) {
+    handleClick = (index) => {
         const array = this.state.posts;
-        array.splice(index, 1);
-        this.setState({post: array});
+        array.splice(index, 1);  //delete el from array,index -where too start from , 1- how many elements removed from index and up
+        this.setState({posts: array}); //substitute the original with duplicate
+    }
+    checkdata = () => {
+        const table = this.state.posts;  //duplicate
+        const res=[]; //empty string
+        for(let i = 0;i < table.length; i++)
+        {
+            res.push( <NewDescript
+                // click = {this.handleClick.bind(i)} 
+                //1
+                click = {() => this.handleClick(i)}
+                data = {this.state.posts[i].data}                
+                name = {this.state.posts[i].name}
+                description ={this.state.posts[i].description}/> 
+                );
+        }
+        return(res);
     }
     
     render () {
@@ -26,31 +44,7 @@ class App extends React.Component{
             </div>
             <button>Click me</button>
             <div>
-                <NewDescript
-                click = {this.handleClick.bind(0)}
-                data = {this.state.posts[0].data}                
-                name = {this.state.posts[0].name}
-                description ={this.state.posts[0].description}/> 
-                
-                <br />
-                <NewDescript
-                click = {this.handleClick.bind(1)}
-                data = {this.state.posts[1].data}                
-                name = {this.state.posts[1].name}
-                description ={this.state.posts[1].description}/> 
-                <br />
-
-                <NewDescript
-                data = "Say something: "                
-                name = "Name: "
-                description ="Description" />
-                <br />
-               
-                <NewDescript
-                data = "Say something : "                
-                name = "Name: "
-                description ="Description" />
-                <br />
+            {this.checkdata()}                
             </div>
         </div> 
     );
